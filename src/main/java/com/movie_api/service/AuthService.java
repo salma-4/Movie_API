@@ -1,8 +1,8 @@
 package com.movie_api.service;
 
-import com.movie_api.dto.user.UserLoginRequestDto;
-import com.movie_api.dto.user.UserRegistrationRequestDto;
-import com.movie_api.dto.user.UserResponseDto;
+import com.movie_api.dto.request.UserLoginRequestDto;
+import com.movie_api.dto.request.UserRegistrationRequestDto;
+import com.movie_api.dto.response.UserResponseDto;
 
 public interface AuthService {
 

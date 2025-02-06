@@ -19,7 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JwtService {
     private final String SECRET_KEY="#y0e4jo8p2ohe4iiioufsehx3t+j+2x2tiourgkjrb6b+";
-    private final long EXPIRATION_TIME= 60*60*1000;
+    private final long EXPIRATION_TIME= 604800000; // 1 week
 
     private final TokenRepository tokenRepository;
 
@@ -30,7 +30,7 @@ public class JwtService {
     }
     public String generateToken(User user){
         Claims claims = Jwts.claims().setSubject(user.getUsername());
-        claims.put("role", user.getRole());
+        claims.put("role", user.getRole().name());
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(user.getUsername())
@@ -43,7 +43,7 @@ public class JwtService {
         try {
             String username = extractUserName(jwt);
             Claims claims = extractAllClaims(jwt);
-            String role = claims.get("roles", String.class);
+            String role = claims.get("role", String.class);
             if (isTokenExpired(claims.getExpiration())) {
                 return false; // Token is expired
             }

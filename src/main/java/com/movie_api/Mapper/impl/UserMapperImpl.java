@@ -1,8 +1,8 @@
 package com.movie_api.Mapper.impl;
 
 import com.movie_api.Mapper.UserMapper;
-import com.movie_api.dto.user.UserRegistrationRequestDto;
-import com.movie_api.dto.user.UserResponseDto;
+import com.movie_api.dto.request.UserRegistrationRequestDto;
+import com.movie_api.dto.response.UserResponseDto;
 import com.movie_api.entity.Token;
 import com.movie_api.entity.User;
 import com.movie_api.entity.enums.Role;

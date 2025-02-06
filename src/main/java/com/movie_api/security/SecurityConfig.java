@@ -53,10 +53,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth->
 
                         auth
-                                .requestMatchers("/api/v1/auth/**", "/swagger-ui/**", "/v3/api-docs").permitAll()
-                                .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                                .anyRequest().authenticated()
+                                .requestMatchers("/dashboard-api/v1/auth/**", "/swagger-ui/**", "/v3/api-docs").permitAll()
+                                .requestMatchers("/dashboard-api/v1/user/**").hasRole("USER")
+                                .requestMatchers("/dashboard-api/v1/admin/**").hasRole("ADMIN")
+                                .anyRequest()
+                                .authenticated()
                 )
                 .sessionManagement(
                         s->

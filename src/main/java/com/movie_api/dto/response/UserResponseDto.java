@@ -1,4 +1,4 @@
-package com.movie_api.dto.user;
+package com.movie_api.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
