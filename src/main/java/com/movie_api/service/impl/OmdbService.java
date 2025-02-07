@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+
 @Service
 @RequiredArgsConstructor
 public class OmdbService {
     private final OmdbConfig omdbConfig;
     private final RestTemplate restTemplate;
+
     public OmdbResponse searchMovie(String title, String imdbId, String type, String year, String plot) {
-        String url = omdbConfig.getApiUrl() ;
-        String apiKey = omdbConfig.getApiKey();
-        UriComponentsBuilder urlBuilder = UriComponentsBuilder.fromHttpUrl(url)
-                .queryParam("apikey", apiKey);
+
+        UriComponentsBuilder urlBuilder =buildUri();
 
         if (title != null && !title.trim().isEmpty()) {
             urlBuilder.queryParam("t", title);
@@ -43,5 +43,14 @@ public class OmdbService {
             return omdbResponse;
         else
             throw new RecordNotFoundException("No Movie found with data you provided" );
+    }
+
+
+    private UriComponentsBuilder buildUri(){
+        String url = omdbConfig.getApiUrl() ;
+        String apiKey = omdbConfig.getApiKey();
+        return UriComponentsBuilder.fromHttpUrl(url)
+                .queryParam("apikey", apiKey);
+
     }
 }

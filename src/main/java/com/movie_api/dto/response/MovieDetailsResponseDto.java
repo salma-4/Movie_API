@@ -1,18 +1,15 @@
-package com.movie_api.entity;
+package com.movie_api.dto.response;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Movie {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MovieDetailsResponseDto {
     private Long id;
     private String imdbID;
     private String title;
@@ -22,12 +19,10 @@ public class Movie {
     private String genre;
     private String director;
     private String actors;
-    @Column(length = 1000)
     private String plot;
     private String language;
     private String country;
     private String poster;
     private String imdbRating;
     private String type;
-
 }

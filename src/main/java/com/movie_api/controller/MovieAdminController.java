@@ -1,31 +1,42 @@
 package com.movie_api.controller;
 
-import com.movie_api.dto.response.OmdbResponse;
-import com.movie_api.service.impl.OmdbService;
+import com.movie_api.dto.request.MovieRequestDto;
+import com.movie_api.dto.response.MovieDetailsResponseDto;
+import com.movie_api.dto.response.MovieResponseDto;
+import com.movie_api.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/dashboard-api/v1/admin")
+@RequestMapping("/dashboard-api/v1/admin/movies")
 @RequiredArgsConstructor
 public class MovieAdminController {
-    private final OmdbService omdbService;
-    @GetMapping("/movie")
-    public ResponseEntity<?> searchMovie(
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String imdbId,
-            @RequestParam(required = false) String type,
-            @RequestParam(required = false) String year,
-            @RequestParam(required = false) String plot
-    ) {
-        if ((title == null || title.trim().isEmpty()) && (imdbId == null || imdbId.trim().isEmpty())) {
-            return ResponseEntity.badRequest().body("At least one of 'title' or 'imdbId' is required.");
-        }
-        OmdbResponse response = omdbService.searchMovie(title, imdbId, type, year, plot);
-        return ResponseEntity.ok(response);
+    private final MovieService movieService;
+   @GetMapping
+   public ResponseEntity< Page<MovieResponseDto>> getAllMovies(@RequestParam Pageable pageable){
+        Page<MovieResponseDto> response = movieService.getAllMovies(pageable);
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+   @GetMapping("/{id}")
+   public ResponseEntity<MovieDetailsResponseDto> getMovieDetails(@PathVariable Long id){
+       MovieDetailsResponseDto response = movieService.getMovieDetails(id);
+       return new ResponseEntity<>(response,HttpStatus.OK);
+   }
+
+
+    @PostMapping
+    public ResponseEntity<String> addMovie(@RequestBody MovieRequestDto movieRequest){
+        String msg = movieService.addMovie(movieRequest);
+        return new ResponseEntity<>(msg, HttpStatus.CREATED);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id){
+
+        movieService.deleteMovie(id);
+        return ResponseEntity.noContent().build();
     }
 }
