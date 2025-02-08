@@ -36,6 +36,8 @@ public class MovieMapperImpl implements MovieMapper {
                 .title(movie.getTitle())
                 .poster(movie.getPoster())
                 .runTime(movie.getRuntime())
+                .year(movie.getYear())
+                .genre(movie.getGenre())
                 .build();
     }
 

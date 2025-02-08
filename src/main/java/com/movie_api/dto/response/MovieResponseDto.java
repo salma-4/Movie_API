@@ -14,6 +14,8 @@ public class MovieResponseDto {
     private String poster ;
     private String title ;
     private String runTime;
+    private String year ;
+    private String genre ;
 
 
 }
