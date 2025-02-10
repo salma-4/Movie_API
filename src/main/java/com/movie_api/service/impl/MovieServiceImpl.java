@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -66,5 +67,17 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(()->new RecordNotFoundException("No movie with id "+id));
         movieRepository.delete(movie);
+    }
+
+    @Transactional
+    public void batchDeleteMovies(List<Long> movieIds) {
+        movieRepository.deleteMoviesByIds(movieIds);
+    }
+
+    @Transactional
+    public void batchAddMovies(List<MovieRequestDto> movieDtos) {
+        for (MovieRequestDto dto : movieDtos) {
+            movieRepository.addMovie(dto.getTitle(), dto.getYear(), dto.getGenre(), dto.getPoster());
+        }
     }
 }

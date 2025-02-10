@@ -65,6 +65,8 @@ mvn spring-boot:run
 | `POST`      | `/dashboard-api/v1/auth/register`                                        | Register a new user                                                     | Public |
 | `POST`      | `/dashboard-api/v1/auth/login`                                           | Authenticate user & return JWT                                          | Public |
 | `GET`       | `dashboard-api/v1/admin/movies"`                                         | Get all movies (paginated)                                              | Admin  |
+| `POST`      | `dashboard-api/v1/admin/movies/batch-add"`                               | Add more than one film    []                                            | Admin  |
+| `DELETE`    | `dashboard-api/v1/admin/movies/batch-delete"`                            | Delete more than one film using Id [2,4]                                | Admin  |
 | `GET`       | `/dashboard-api/v1/admin/movies/{id}`                                    | Get movie details                                                       | Admin  |
 | `POST`      | `/dashboard-api/v1/admin/movies`                                         | Add a new movie                                                         | Admin  |
 | `DELETE`    | `/dashboard-api/v1/admin/movies/{id}`                                    | Delete a movie                                                          | Admin  |

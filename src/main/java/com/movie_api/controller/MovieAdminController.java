@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -45,5 +46,17 @@ public class MovieAdminController {
 
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/batch-delete")
+    public ResponseEntity<String> batchDeleteMovies(@RequestBody List<Long> movieIds) {
+        movieService.batchDeleteMovies(movieIds);
+        return ResponseEntity.ok("Movies deleted successfully");
+    }
+
+    @PostMapping("/batch-add")
+    public ResponseEntity<String> batchAddMovies(@RequestBody List<MovieRequestDto> movieDtos) {
+        movieService.batchAddMovies(movieDtos);
+        return ResponseEntity.ok("Movies added successfully");
     }
 }
