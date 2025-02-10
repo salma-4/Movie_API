@@ -29,6 +29,14 @@ public class MovieServiceImpl implements MovieService {
         return page.map(movieMapper :: toMovieResponseDto);
     }
 
+    public Page<MovieResponseDto> getMoviesByTitle(Pageable pageable ,String title){
+     Page<Movie> movies = movieRepository.findByTitle(title,pageable);
+
+     return movies.map(
+             movieMapper :: toMovieResponseDto
+     );
+    }
+
     @Override
     public MovieDetailsResponseDto getMovieDetails(Long id) {
         Movie movie = movieRepository.findById(id)

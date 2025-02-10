@@ -28,5 +28,13 @@ public class MovieUserController {
         MovieDetailsResponseDto response = movieService.getMovieDetails(id);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
+    @GetMapping("/movie")
+    public ResponseEntity<Page<MovieResponseDto>> getMoviesByTitle(
+            @RequestParam(value = "title", required = false) String title,
+            @PageableDefault( sort = "title") Pageable pageable) {
+
+        Page<MovieResponseDto> movies = movieService.getMoviesByTitle(pageable,title);
+        return ResponseEntity.ok(movies);
+    }
 
 }

@@ -58,7 +58,7 @@ mvn spring-boot:run
     - `USER`: Can **search and view** movies.
 
 ---
-
+/dashboard-api/v1/user/movies/movie?title=home
 ## **API Endpoints**
 | HTTP Method | Endpoint                                                                 | Description                                                             | Access |
 |-------------|--------------------------------------------------------------------------|-------------------------------------------------------------------------|--------|
@@ -68,6 +68,7 @@ mvn spring-boot:run
 | `GET`       | `/dashboard-api/v1/admin/movies/{id}`                                    | Get movie details                                                       | Admin  |
 | `POST`      | `/dashboard-api/v1/admin/movies`                                         | Add a new movie                                                         | Admin  |
 | `DELETE`    | `/dashboard-api/v1/admin/movies/{id}`                                    | Delete a movie                                                          | Admin  |
+| `GET`       | `/dashboard-api/v1/user/movies/movie?tilte={}`                           | Get movies in DB by title (pagination)                                  | USER   |
 | `GET`       | `/dashboard-api/v1/user/movies`                                          | Get all movies in DB                                                    | USER   |
 | `GET`       | `/dashboard-api/v1/user/movies/{id}`                                     | Get Movie details                                                       | USER   |
 | `GET`       | `/dashboard-api/v1/admin/omdb/movies?imdbId=&title=&imdbId=&type=&year=` | Get movies (params can be null but entering imdbId or title(Pagination) | Admin  |

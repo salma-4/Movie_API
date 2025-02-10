@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 public interface MovieService {
 
     Page<MovieResponseDto> getAllMovies(Pageable pageable);
-
+    Page<MovieResponseDto> getMoviesByTitle(Pageable pageable ,String title);
     MovieDetailsResponseDto getMovieDetails(Long id);
     String addMovie(MovieRequestDto movieRequestDto);
     void deleteMovie(Long id) ;
