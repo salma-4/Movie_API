@@ -7,17 +7,22 @@ import com.movie_api.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/dashboard-api/v1/admin/movies")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class MovieAdminController {
     private final MovieService movieService;
    @GetMapping
-   public ResponseEntity< Page<MovieResponseDto>> getAllMovies(@RequestParam Pageable pageable){
+   public ResponseEntity< Page<MovieResponseDto>> getAllMovies(@PageableDefault Pageable pageable){
         Page<MovieResponseDto> response = movieService.getAllMovies(pageable);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
@@ -29,9 +34,11 @@ public class MovieAdminController {
 
 
     @PostMapping
-    public ResponseEntity<String> addMovie(@RequestBody MovieRequestDto movieRequest){
+    public ResponseEntity<Map<String, String>> addMovie(@RequestBody MovieRequestDto movieRequest){
         String msg = movieService.addMovie(movieRequest);
-        return new ResponseEntity<>(msg, HttpStatus.CREATED);
+        Map<String, String> response = new HashMap<>();
+        response.put("message",msg);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id){

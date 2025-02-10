@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OmdbResponse {
+public class OmdbAllDataResponse {
 
     @JsonProperty("Title")
     private String title;

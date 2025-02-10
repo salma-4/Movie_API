@@ -1,5 +1,6 @@
 package com.movie_api.dto.response;
 
+import com.movie_api.entity.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,6 @@ import java.time.ZonedDateTime;
 public class UserResponseDto {
 
     private String jwt;
-    private ZonedDateTime expiredAt;
+    private String role;
 
 }

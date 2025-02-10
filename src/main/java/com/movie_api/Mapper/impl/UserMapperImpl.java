@@ -31,7 +31,7 @@ public class UserMapperImpl implements UserMapper {
     public UserResponseDto toUserResponseDto(Token token) {
         return UserResponseDto.builder()
                 .jwt(token.getJwt())
-                .expiredAt(token.getExpiredAt())
+                .role(token.getUser().getRole().name())
                 .build();
     }
 

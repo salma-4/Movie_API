@@ -1,7 +1,7 @@
 package com.movie_api.service.impl;
 
 import com.movie_api.config.OmdbConfig;
-import com.movie_api.dto.response.OmdbResponse;
+import com.movie_api.dto.response.OmdbAllDataResponse;
 import com.movie_api.exception.RecordNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class OmdbService {
     private final OmdbConfig omdbConfig;
     private final RestTemplate restTemplate;
 
-    public OmdbResponse searchMovie(String title, String imdbId, String type, String year, String plot) {
+    public OmdbAllDataResponse searchMovie(String title, String imdbId, String type, String year, String plot) {
 
         UriComponentsBuilder urlBuilder =buildUri();
 
@@ -38,12 +38,13 @@ public class OmdbService {
         String finalUrl = urlBuilder.toUriString();
         System.out.println("Constructed URL: " + finalUrl);
 
-        OmdbResponse omdbResponse = restTemplate.getForObject(urlBuilder.toUriString(), OmdbResponse.class);
-        if(omdbResponse.getResponse())
-            return omdbResponse;
+        OmdbAllDataResponse omdbAllDataResponse = restTemplate.getForObject(urlBuilder.toUriString(), OmdbAllDataResponse.class);
+        if(omdbAllDataResponse.getResponse())
+            return omdbAllDataResponse;
         else
             throw new RecordNotFoundException("No Movie found with data you provided" );
     }
+
 
 
     private UriComponentsBuilder buildUri(){
